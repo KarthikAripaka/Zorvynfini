@@ -9,22 +9,25 @@ class AppTheme {
   static final ThemeData light = ThemeData(
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.primary,
+      brightness: Brightness.light,
       primary: AppColors.primary,
       secondary: AppColors.accent,
-      surface: AppColors.surface,
-      background: AppColors.neutralBg,
+      surface: Colors.white,
       onPrimary: AppColors.primaryLight,
-      onSecondary: AppColors.textPrimary,
-      onSurface: AppColors.textPrimary,
-      onBackground: AppColors.textPrimary,
+      onSecondary: Colors.black,
+      onSurface: Colors.black,
+      onBackground: Colors.black,
       error: AppColors.danger,
     ),
     useMaterial3: true,
-    scaffoldBackgroundColor: AppColors.neutralBg,
+    scaffoldBackgroundColor: Colors.white,
     cardTheme: CardThemeData(
-      color: AppColors.surface,
+      color: Colors.white,
       elevation: 0.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: const BorderSide(color: Colors.black12),
+      ),
       surfaceTintColor: Colors.transparent,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -39,28 +42,31 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: AppColors.border.withOpacity(0.5)),
+        borderSide: const BorderSide(color: Colors.black26),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: AppColors.border.withOpacity(0.5)),
+        borderSide: const BorderSide(color: Colors.black26),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(color: AppColors.primary, width: 2),
       ),
       filled: true,
-      fillColor: AppColors.surface,
+      fillColor: Colors.white,
       contentPadding: const EdgeInsets.all(16),
     ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
+      backgroundColor: Colors.white,
       surfaceTintColor: Colors.transparent,
       titleTextStyle: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w600,
         height: 1.2,
+        color: Colors.black,
       ),
+      iconTheme: IconThemeData(color: Colors.black),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
@@ -69,9 +75,10 @@ class AppTheme {
     ),
     textTheme: _textTheme(Brightness.light),
     navigationBarTheme: const NavigationBarThemeData(
-      backgroundColor: AppColors.surface,
+      backgroundColor: Colors.white,
       indicatorColor: AppColors.primaryLight,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+      surfaceTintColor: Colors.transparent,
     ),
   );
 

@@ -14,11 +14,11 @@ class AppColors {
   static const danger = Color(0xFFE05252);
 
   // Neutrals
-  static const neutralBg = Color(0xFFF7F8FA);
+  static const neutralBg = Color(0xFFFFFFFF);
   static const surface = Color(0xFFFFFFFF);
-  static const textPrimary = Color(0xFF1A1D23);
-  static const textSecondary = Color(0xFF6B7280);
-  static const border = Color(0xFFE5E7EB);
+  static const textPrimary = Color(0xFF000000);
+  static const textSecondary = Color(0xFF333333);
+  static const border = Color(0xFF000000);
 
   // Dark mode counterparts
   static const darkPrimary = Color(0xFF4CAF50);
