@@ -26,7 +26,7 @@ class RecentTransactionsList extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               'Recent Transactions',
               style: AppTextStyles.headlineSmall,
             ),
@@ -53,7 +53,7 @@ class RecentTransactionsList extends ConsumerWidget {
                 color: AppColors.border.withOpacity(0.5),
               ),
             ),
-            child: const Center(
+            child: Center(
               child: Text(
                 'No transactions yet',
                 style: AppTextStyles.bodyMedium,

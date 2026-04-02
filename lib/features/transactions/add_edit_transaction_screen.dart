@@ -169,7 +169,7 @@ class _AddEditTransactionScreenState
             const Gap(24),
 
             // Category selector
-            const Text('Category', style: AppTextStyles.headlineSmall),
+            Text('Category', style: AppTextStyles.headlineSmall),
             const Gap(12),
             SizedBox(
               height: 90,
@@ -368,14 +368,14 @@ class _AddEditTransactionScreenState
         showDialog<void>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('Insufficient Balance'),
+            title: Text('Insufficient Balance'),
             content: Text(
               'You need \u20B9${amount.toStringAsFixed(0)} but your current balance is \u20B9${availableBalance.toStringAsFixed(0)}. Please add income first.',
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text('OK'),
+                child: Text('OK'),
               ),
             ],
           ),

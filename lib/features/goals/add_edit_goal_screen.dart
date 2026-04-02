@@ -35,7 +35,7 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Goal'),
+        title: Text('Create Goal'),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
@@ -47,7 +47,7 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Goal type selector
-            const Text('Goal Type', style: AppTextStyles.headlineSmall),
+            Text('Goal Type', style: AppTextStyles.headlineSmall),
             const Gap(12),
             ...GoalType.values.map((type) {
               final isSelected = type == _selectedType;
@@ -115,7 +115,7 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
             const Gap(24),
 
             // Title
-            const Text('Goal Name', style: AppTextStyles.headlineSmall),
+            Text('Goal Name', style: AppTextStyles.headlineSmall),
             const Gap(12),
             TextField(
               controller: _titleController,
@@ -146,7 +146,7 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
             const Gap(24),
 
             // Deadline (optional)
-            const Text('Deadline (optional)',
+            Text('Deadline (optional)',
                 style: AppTextStyles.headlineSmall),
             const Gap(12),
             GestureDetector(

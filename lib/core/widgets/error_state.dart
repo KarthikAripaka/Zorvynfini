@@ -28,7 +28,7 @@ class ErrorState extends StatelessWidget {
               color: AppColors.danger,
             ),
             const Gap(16),
-            const Text(
+            Text(
               'Oops!',
               style: AppTextStyles.headlineMedium,
             ),
@@ -43,7 +43,7 @@ class ErrorState extends StatelessWidget {
               OutlinedButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh, size: 20),
-                label: const Text('Retry'),
+                label: Text('Retry'),
               ),
             ],
           ],

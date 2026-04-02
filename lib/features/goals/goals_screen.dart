@@ -38,7 +38,7 @@ class GoalsScreen extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Goals & Challenges',
                           style: AppTextStyles.headlineLarge,
                         ),
@@ -64,9 +64,9 @@ class GoalsScreen extends ConsumerWidget {
                   )
                 else ...[
                   if (activeGoals.isNotEmpty) ...[
-                    const SliverToBoxAdapter(
+                    SliverToBoxAdapter(
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 24, 20, 12),
+                        padding: const EdgeInsets.fromLTRB(20, 24, 20, 12),
                         child: Text(
                           'Active',
                           style: AppTextStyles.headlineSmall,
@@ -172,7 +172,7 @@ class GoalsScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Cancel'),
+            child: Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -199,7 +199,7 @@ class GoalsScreen extends ConsumerWidget {
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Add'),
+            child: Text('Add'),
           ),
         ],
       ),

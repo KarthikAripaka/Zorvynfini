@@ -50,7 +50,7 @@ class DashboardScreen extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Welcome,',
                               style: AppTextStyles.bodyMedium,
                             ),
@@ -103,7 +103,7 @@ class DashboardScreen extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'This Week',
                           style: AppTextStyles.headlineSmall,
                         ),
@@ -135,7 +135,7 @@ class DashboardScreen extends ConsumerWidget {
 
                   // Active Goals Preview
                   if (dashboardData.activeGoals.isNotEmpty) ...[
-                    const Text(
+                    Text(
                       'Active Goals',
                       style: AppTextStyles.headlineSmall,
                     ),
@@ -250,7 +250,7 @@ class DashboardScreen extends ConsumerWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => SimpleDialog(
-        title: const Text('Theme'),
+        title: Text('Theme'),
         children: [
           _ThemeOption(
             icon: Icons.brightness_auto,

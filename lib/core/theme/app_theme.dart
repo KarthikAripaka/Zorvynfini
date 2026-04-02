@@ -153,27 +153,23 @@ class AppTheme {
   );
 
   static TextTheme _textTheme(Brightness brightness) {
-    final base = (brightness == Brightness.light
-            ? Typography.material2021().black
-            : Typography.material2021().white)
-        .apply(
-      bodyColor:
-          brightness == Brightness.light ? null : AppColors.darkTextPrimary,
-      displayColor:
-          brightness == Brightness.light ? null : AppColors.darkTextPrimary,
+    final isDark = brightness == Brightness.dark;
+    final base = Typography.material2021().black.apply(
+      bodyColor: Colors.black,
+      displayColor: Colors.black,
     );
 
     return base
         .copyWith(
-          displayLarge: AppTextStyles.displayLarge,
-          displayMedium: AppTextStyles.displayMedium,
-          displaySmall: AppTextStyles.displaySmall,
-          headlineLarge: AppTextStyles.headlineLarge,
-          headlineMedium: AppTextStyles.headlineMedium,
-          headlineSmall: AppTextStyles.headlineSmall,
-          bodyLarge: AppTextStyles.bodyLarge,
-          bodyMedium: AppTextStyles.bodyMedium,
-          bodySmall: AppTextStyles.bodySmall,
+          displayLarge: AppTextStyles.displayLarge.copyWith(color: isDark ? Colors.white : Colors.black),
+          displayMedium: AppTextStyles.displayMedium.copyWith(color: isDark ? Colors.white : Colors.black),
+          displaySmall: AppTextStyles.displaySmall.copyWith(color: isDark ? Colors.white : Colors.black),
+          headlineLarge: AppTextStyles.headlineLarge.copyWith(color: isDark ? Colors.white : Colors.black),
+          headlineMedium: AppTextStyles.headlineMedium.copyWith(color: isDark ? Colors.white : Colors.black),
+          headlineSmall: AppTextStyles.headlineSmall.copyWith(color: isDark ? Colors.white : Colors.black),
+          bodyLarge: AppTextStyles.bodyLarge.copyWith(color: isDark ? Colors.white : Colors.black),
+          bodyMedium: AppTextStyles.bodyMedium.copyWith(color: isDark ? Colors.white70 : Colors.black87),
+          bodySmall: AppTextStyles.bodySmall.copyWith(color: isDark ? Colors.white54 : Colors.black54),
         )
         .apply(fontFamily: 'DMSans');
   }

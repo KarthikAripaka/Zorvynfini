@@ -53,7 +53,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Transactions',
                             style: AppTextStyles.headlineLarge,
                           ),
