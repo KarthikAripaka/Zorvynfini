@@ -8,9 +8,9 @@ class AppTheme {
 
   static final ThemeData light = ThemeData(
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.primary,
+      seedColor: const Color.fromARGB(255, 246, 249, 248),
       brightness: Brightness.light,
-      primary: AppColors.primary,
+      primary: const Color.fromARGB(255, 244, 247, 246),
       secondary: AppColors.accent,
       surface: Colors.white,
       onPrimary: AppColors.primaryLight,
@@ -50,7 +50,8 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
+        borderSide: const BorderSide(
+            color: Color.fromARGB(255, 226, 232, 230), width: 2),
       ),
       filled: true,
       fillColor: Colors.white,
