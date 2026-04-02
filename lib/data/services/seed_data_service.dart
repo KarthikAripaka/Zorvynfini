@@ -91,7 +91,7 @@ class SeedDataService {
         type: GoalType.savings,
         deadline: now.add(const Duration(days: 90)),
         createdAt: now.subtract(const Duration(days: 30)),
-        contributionStreak: 5,
+        contributionStreak: 8,
         lastContribution: now.subtract(const Duration(days: 1)),
       ),
       Goal(
@@ -102,7 +102,7 @@ class SeedDataService {
         type: GoalType.savings,
         deadline: now.add(const Duration(days: 60)),
         createdAt: now.subtract(const Duration(days: 20)),
-        contributionStreak: 3,
+        contributionStreak: 9,
         lastContribution: now.subtract(const Duration(days: 2)),
       ),
       Goal(
