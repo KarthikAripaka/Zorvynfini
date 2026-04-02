@@ -8,13 +8,16 @@ class SeedDataService {
     final transactionBox = Hive.box<Transaction>('transactions');
     final goalsBox = Hive.box<Goal>('goals');
 
-    if (transactionBox.isEmpty) {
-      await _seedTransactions(transactionBox);
+    // Clear existing data and reseed
+    if (transactionBox.isNotEmpty) {
+      await transactionBox.clear();
     }
+    await _seedTransactions(transactionBox);
 
-    if (goalsBox.isEmpty) {
-      await _seedGoals(goalsBox);
+    if (goalsBox.isNotEmpty) {
+      await goalsBox.clear();
     }
+    await _seedGoals(goalsBox);
 
     await transactionBox.close();
     await goalsBox.close();
