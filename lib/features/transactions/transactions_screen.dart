@@ -270,26 +270,6 @@ class _FilterChipsRow extends ConsumerWidget {
           ),
           const Gap(8),
           _FilterChip(
-            label: 'This Week',
-            isSelected: filter.dateFrom != null &&
-                filter.dateFrom!.isAfter(
-                  DateTime.now().subtract(const Duration(days: 7)),
-                ),
-            onTap: () {
-              final now = DateTime.now();
-              final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
-              final notifier = ref.read(transactionFilterProvider.notifier);
-              notifier.state = filter.copyWith(
-                dateFrom: () => DateTime(
-                  startOfWeek.year,
-                  startOfWeek.month,
-                  startOfWeek.day,
-                ),
-              );
-            },
-          ),
-          const Gap(8),
-          _FilterChip(
             label: 'This Month',
             isSelected: filter.dateFrom != null &&
                 filter.dateFrom!.month == DateTime.now().month,
