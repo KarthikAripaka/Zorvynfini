@@ -38,8 +38,12 @@ class GoalsNotifier extends StateNotifier<List<Goal>> {
   static const _uuid = Uuid();
 
   int getContributionStreak(String goalId) {
-    final goal = state.firstWhere((g) => g.id == goalId, orElse: () => state.first);
-    return goal.contributionStreak;
+    try {
+      final goal = state.firstWhere((g) => g.id == goalId);
+      return goal.contributionStreak;
+    } catch (e) {
+      return 0;
+    }
   }
 
   void _updateContributionStreak(Goal goal) {
@@ -185,8 +189,8 @@ class GoalsNotifier extends StateNotifier<List<Goal>> {
     final oldAmount = goal.currentAmount;
     await update(updated);
 
-    // Update contribution streak
-    _updateContributionStreak(goal);
+    // Update contribution streak with updated goal
+    _updateContributionStreak(updated);
 
     await DatabaseService().logAudit(
       action: AuditAction.update,

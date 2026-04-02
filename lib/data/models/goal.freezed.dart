@@ -93,6 +93,8 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
     Object? lastCheckIn = freezed,
     Object? isCompleted = null,
     Object? createdAt = null,
+    Object? contributionStreak = null,
+    Object? lastContribution = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -135,6 +137,14 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      contributionStreak: null == contributionStreak
+          ? _value.contributionStreak
+          : contributionStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastContribution: freezed == lastContribution
+          ? _value.lastContribution
+          : lastContribution // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -156,7 +166,9 @@ abstract class _$$GoalImplCopyWith<$Res> implements $GoalCopyWith<$Res> {
       @HiveField(6) int streakDays,
       @HiveField(7) DateTime? lastCheckIn,
       @HiveField(8) bool isCompleted,
-      @HiveField(9) DateTime createdAt});
+      @HiveField(9) DateTime createdAt,
+      @HiveField(10) int contributionStreak,
+      @HiveField(11) DateTime? lastContribution});
 }
 
 /// @nodoc
@@ -179,6 +191,8 @@ class __$$GoalImplCopyWithImpl<$Res>
     Object? lastCheckIn = freezed,
     Object? isCompleted = null,
     Object? createdAt = null,
+    Object? contributionStreak = null,
+    Object? lastContribution = freezed,
   }) {
     return _then(_$GoalImpl(
       id: null == id
@@ -221,6 +235,14 @@ class __$$GoalImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      contributionStreak: null == contributionStreak
+          ? _value.contributionStreak
+          : contributionStreak // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastContribution: freezed == lastContribution
+          ? _value.lastContribution
+          : lastContribution // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -280,6 +302,7 @@ class _$GoalImpl extends _Goal {
   @HiveField(9)
   final DateTime createdAt;
   @override
+  @JsonKey()
   @HiveField(10)
   final int contributionStreak;
   @override

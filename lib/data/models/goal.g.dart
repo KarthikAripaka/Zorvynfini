@@ -20,14 +20,14 @@ class GoalAdapter extends TypeAdapter<Goal> {
       id: fields[0] as String,
       title: fields[1] as String,
       targetAmount: fields[2] as double,
-      currentAmount: fields[3] as double? ?? 0.0,
+      currentAmount: fields[3] as double,
       deadline: fields[4] as DateTime?,
       type: fields[5] as GoalType,
-      streakDays: fields[6] as int? ?? 0,
+      streakDays: fields[6] as int,
       lastCheckIn: fields[7] as DateTime?,
-      isCompleted: fields[8] as bool? ?? false,
+      isCompleted: fields[8] as bool,
       createdAt: fields[9] as DateTime,
-      contributionStreak: fields[10] as int? ?? 0,
+      contributionStreak: fields[10] as int,
       lastContribution: fields[11] as DateTime?,
     );
   }
@@ -92,6 +92,10 @@ _$GoalImpl _$$GoalImplFromJson(Map<String, dynamic> json) => _$GoalImpl(
           : DateTime.parse(json['lastCheckIn'] as String),
       isCompleted: json['isCompleted'] as bool? ?? false,
       createdAt: DateTime.parse(json['createdAt'] as String),
+      contributionStreak: (json['contributionStreak'] as num?)?.toInt() ?? 0,
+      lastContribution: json['lastContribution'] == null
+          ? null
+          : DateTime.parse(json['lastContribution'] as String),
     );
 
 Map<String, dynamic> _$$GoalImplToJson(_$GoalImpl instance) =>
@@ -106,6 +110,8 @@ Map<String, dynamic> _$$GoalImplToJson(_$GoalImpl instance) =>
       'lastCheckIn': instance.lastCheckIn?.toIso8601String(),
       'isCompleted': instance.isCompleted,
       'createdAt': instance.createdAt.toIso8601String(),
+      'contributionStreak': instance.contributionStreak,
+      'lastContribution': instance.lastContribution?.toIso8601String(),
     };
 
 const _$GoalTypeEnumMap = {
