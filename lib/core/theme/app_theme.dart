@@ -7,17 +7,22 @@ class AppTheme {
   AppTheme._();
 
   static final ThemeData light = ThemeData(
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.grey,
+    colorScheme: const ColorScheme(
       brightness: Brightness.light,
-      primary: Colors.black87,
-      secondary: AppColors.accent,
-      surface: Colors.white,
+      primary: Colors.black,
       onPrimary: Colors.white,
-      onSecondary: Colors.black,
+      primaryContainer: Colors.white,
+      onPrimaryContainer: Colors.black,
+      secondary: Colors.orange,
+      onSecondary: Colors.white,
+      secondaryContainer: Colors.white,
+      onSecondaryContainer: Colors.black,
+      tertiary: Colors.blue,
+      onTertiary: Colors.white,
+      surface: Colors.white,
       onSurface: Colors.black,
-      onBackground: Colors.black,
-      error: AppColors.danger,
+      error: Color(0xFFE05252),
+      onError: Colors.white,
     ),
     useMaterial3: true,
     scaffoldBackgroundColor: Colors.white,
