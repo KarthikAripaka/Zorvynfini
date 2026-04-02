@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 import '../../../data/models/goal.dart';
 import '../../../data/adapters/goal_adapter.dart';
+import '../../../core/providers/settings_provider.dart';
 
 final goalsBoxProvider = FutureProvider<Box<Goal>>((ref) async {
   if (!Hive.isAdapterRegistered(1)) {
@@ -14,15 +15,17 @@ final goalsBoxProvider = FutureProvider<Box<Goal>>((ref) async {
 
 final goalsProvider = StateNotifierProvider<GoalsNotifier, List<Goal>>((ref) {
   final box = ref.watch(goalsBoxProvider);
-  return GoalsNotifier(box.value);
+  final settingsNotifier = ref.watch(settingsProvider.notifier);
+  return GoalsNotifier(box.value, settingsNotifier);
 });
 
 class GoalsNotifier extends StateNotifier<List<Goal>> {
-  GoalsNotifier(this._box) : super([]) {
+  GoalsNotifier(this._box, this._settingsNotifier) : super([]) {
     _load();
   }
 
   final Box<Goal>? _box;
+  final SettingsNotifier _settingsNotifier;
   static const _uuid = Uuid();
 
   void _load() {
@@ -71,13 +74,24 @@ class GoalsNotifier extends StateNotifier<List<Goal>> {
     }
   }
 
-  Future<void> addMoney(String goalId, double amount) async {
+  Future<bool> addMoney(String goalId, double amount) async {
     final goal = state.firstWhere((g) => g.id == goalId);
+    
+    // Check if sufficient balance
+    if (_settingsNotifier.state.balance < amount) {
+      return false;
+    }
+
+    // Deduct from balance
+    await _settingsNotifier.subtractFromBalance(amount);
+
+    // Update goal
     final updated = goal.copyWith(
       currentAmount: goal.currentAmount + amount,
       isCompleted: goal.currentAmount + amount >= goal.targetAmount,
     );
     await update(updated);
+    return true;
   }
 
   Future<void> checkInStreak(String goalId) async {

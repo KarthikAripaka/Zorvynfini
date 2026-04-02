@@ -9,10 +9,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 import '../../core/theme/app_text_styles.dart';
 import '../../core/utils/extensions.dart';
 import '../../core/providers/settings_provider.dart';
-import '../transactions/providers/transactions_provider.dart';
-import '../goals/providers/goals_provider.dart';
-import '../../data/models/transaction.dart';
-import '../../data/models/goal.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -24,6 +20,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final PageController _pageController = PageController();
   final TextEditingController _incomeController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   int _currentPage = 0;
   bool _isOnboardingComplete = false;
 
@@ -153,11 +150,39 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           ),
           const Gap(16),
           const Text(
-            'Enter your monthly income for personalized insights',
+            'Enter your name and starting balance',
             style: AppTextStyles.bodyLarge,
             textAlign: TextAlign.center,
           ),
-          const Gap(48),
+          const Gap(32),
+          // Name input
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+              ),
+            ),
+            child: TextField(
+              controller: _nameController,
+              style: AppTextStyles.bodyLarge,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Enter your name',
+                hintStyle: AppTextStyles.bodyLarge.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                ),
+                prefixIcon: Icon(
+                  Icons.person_outline,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+          ),
+          const Gap(20),
+          // Balance input
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
@@ -256,108 +281,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       setState(() => _isOnboardingComplete = true);
 
       final income = double.tryParse(_incomeController.text) ?? 50000.0;
+      final name =
+          _nameController.text.trim().isEmpty ? 'User' : _nameController.text.trim();
 
-      // Save onboarding state
+      // Save onboarding state with name and balance
       await ref.read(settingsProvider.notifier).completeOnboarding(
             monthlyIncome: income,
             balance: income,
+            userName: name,
           );
-
-      // Seed sample transactions
-      final now = DateTime.now();
-      final transactionsNotifier = ref.read(transactionsProvider.notifier);
-
-      final sampleTransactions = [
-        {
-          'amount': income,
-          'type': TransactionType.income,
-          'categoryId': 'income',
-          'title': 'Monthly Salary',
-          'date': DateTime(now.year, now.month, 1),
-        },
-        {
-          'amount': 1200.0,
-          'type': TransactionType.expense,
-          'categoryId': 'food',
-          'title': 'Grocery Shopping',
-          'date': now.subtract(const Duration(days: 1)),
-        },
-        {
-          'amount': 500.0,
-          'type': TransactionType.expense,
-          'categoryId': 'transport',
-          'title': 'Uber Rides',
-          'date': now.subtract(const Duration(days: 2)),
-        },
-        {
-          'amount': 2500.0,
-          'type': TransactionType.expense,
-          'categoryId': 'shopping',
-          'title': 'New Shoes',
-          'date': now.subtract(const Duration(days: 3)),
-        },
-        {
-          'amount': 300.0,
-          'type': TransactionType.expense,
-          'categoryId': 'entertainment',
-          'title': 'Movie Night',
-          'date': now.subtract(const Duration(days: 4)),
-        },
-        {
-          'amount': 800.0,
-          'type': TransactionType.expense,
-          'categoryId': 'utilities',
-          'title': 'Electricity Bill',
-          'date': now.subtract(const Duration(days: 5)),
-        },
-        {
-          'amount': 15000.0,
-          'type': TransactionType.expense,
-          'categoryId': 'housing',
-          'title': 'Rent Payment',
-          'date': DateTime(now.year, now.month, 1),
-        },
-        {
-          'amount': 350.0,
-          'type': TransactionType.expense,
-          'categoryId': 'health',
-          'title': 'Pharmacy',
-          'date': now.subtract(const Duration(days: 6)),
-        },
-      ];
-
-      for (final t in sampleTransactions) {
-        await transactionsNotifier.add(
-          amount: t['amount'] as double,
-          type: t['type'] as TransactionType,
-          categoryId: t['categoryId'] as String,
-          title: t['title'] as String,
-          date: t['date'] as DateTime,
-        );
-      }
-
-      // Seed sample goals
-      final goalsNotifier = ref.read(goalsProvider.notifier);
-
-      await goalsNotifier.add(
-        title: 'Emergency Fund',
-        targetAmount: 100000,
-        type: GoalType.savings,
-        deadline: now.add(const Duration(days: 180)),
-      );
-
-      await goalsNotifier.add(
-        title: 'No Takeout Week',
-        targetAmount: 0,
-        type: GoalType.noSpend,
-      );
-
-      await goalsNotifier.add(
-        title: 'Monthly Budget',
-        targetAmount: income * 0.7,
-        type: GoalType.budget,
-        deadline: DateTime(now.year, now.month + 1, 0),
-      );
 
       // Navigate to dashboard
       if (mounted && context.mounted) {
@@ -370,6 +302,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   void dispose() {
     _pageController.dispose();
     _incomeController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 }

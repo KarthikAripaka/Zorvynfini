@@ -33,13 +33,6 @@ class DashboardScreen extends ConsumerWidget {
         body: Center(child: Text('Error: $e')),
       ),
       data: (_) {
-        final hour = DateTime.now().hour;
-        final greeting = hour < 12
-            ? 'Good morning'
-            : hour < 17
-                ? 'Good afternoon'
-                : 'Good evening';
-
         return Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
@@ -58,7 +51,7 @@ class DashboardScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '$greeting,',
+                              'Welcome,',
                               style: AppTextStyles.bodyMedium,
                             ),
                             const Gap(2),

@@ -174,12 +174,22 @@ class GoalsScreen extends ConsumerWidget {
             child: const Text('Cancel'),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               final amount = double.tryParse(controller.text);
               if (amount != null && amount > 0) {
-                ref.read(goalsProvider.notifier).addMoney(goal.id, amount);
-                HapticFeedback.mediumImpact();
-                Navigator.pop(ctx);
+                final success = await ref.read(goalsProvider.notifier).addMoney(goal.id, amount);
+                if (success) {
+                  HapticFeedback.mediumImpact();
+                  Navigator.pop(ctx);
+                } else {
+                  Navigator.pop(ctx);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Insufficient balance. Please add income first.'),
+                      backgroundColor: AppColors.danger,
+                    ),
+                  );
+                }
               }
             },
             style: ElevatedButton.styleFrom(
